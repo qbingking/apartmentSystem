@@ -47,7 +47,10 @@
 					$.ajax({
 							type:'post',
 							url: '<?= base_url() ?>Apartment/deleteRoom',
-							data: {room_id: room_id}
+							data: {room_id: room_id},
+							success: function(){
+								console.log(`deleted room id = ${room_id}`);
+							}
 					});
 
 				});
