@@ -11,8 +11,12 @@ $data = [
 <div id="apm_<?= $item_apm['id'] ?>" class="collapse address-detail" role="tabpanel">
 	<div class="card-body">
 		<div class="d-none d-md-block">
-			<?php $this->load->view('components/apm-services', $data); ?>
+			<?php 
+				$this->load->view('components/apm-services', $data); 
+			?>
 		</div>
-		<?php $this->load->view('components/apm-note-rooms-images-map', $data); ?>
+		<?php
+			$this->load->view('components/apm-note-rooms-images-map', $data); 
+		?>
 	</div>
 </div>

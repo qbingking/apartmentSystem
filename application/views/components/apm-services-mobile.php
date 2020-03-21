@@ -3,8 +3,16 @@
         <div id="apm_service_info_mobile<?= $item_apm['id'] ?>" class="carousel slide " data-ride="carousel" data-interval="false">
                 <div class="carousel-inner">
                     <?php for ($i= 0; $i < count($list_service["list_service"]); $i+= 5): ?>
+                            <?php 
+                                $service_info_editable = '';
+                                if($list_district_editable != null)
+                                {
+                                    $service_info_editable = in_array($district_key, $list_district_editable) != 0 ? 'service-info-editable':'';
+                                }
+                                
+                             ?>
                             <div class="carousel-item border rounded border-warning <?= $list_service['list_service'][$i]['key_service'] == 'dien'? 'active':'' ?>">
-                                <ul class="list-group <?= in_array($district_key, $list_district_editable) != 0 ? 'service-info-editable':''  ?>">
+                                <ul class="list-group <?= $service_info_editable ?>">
                                     <li class="list-group-item "><?= $list_service["list_service"][$i]["name"] ?>  <br>
                                         <span class="float-right service-info ">
                                             <div 

@@ -33,11 +33,12 @@ class Apartment extends CI_Controller {
 			'template' => 'body-contents/apm-list',
 			'quote' => get_random_quote(),
 			'district_active' => $this->session->district_active,
-			'list_district_editable' => get_districts_CRUD($this->session->status, $this->session->account),
+			'list_district_editable' => get_districts_CRUD($this->session->status, $this->session->account) != null ? get_districts_CRUD($this->session->status, $this->session->account): null,
 			'editable' => get_districts_CRUD(
 							$this->session->status, 
 							$this->session->account) != null ? true : false
 		];
+		// echo "<pre>",print_r($data),"</pre>";
 
 		$menu = [
 			'list_menu' => get_menubar($this->session->status),

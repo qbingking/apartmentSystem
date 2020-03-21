@@ -7,18 +7,16 @@
 <div class="row">
 	<div class="offset-md-1 col-md-10 offset-xl-1 col-xl-8 col-12">
 		<div class="card-box">
-			<?php $this->load->view('components/apm-quotes', array('quote' => $quote)); ?>
-
 			<?php 
-        		$district_active = ($this->session->district_active != '') ? 
+				$district_active = ($this->session->district_active != '') ? 
         							$this->session->district_active : 7;
-         	?>
+				$this->load->view('components/apm-quotes', array('quote' => $quote)); 
+        		
 
-         	<?php 
-         		$this->load->view('components/apm-districts-nav', 
-         							array(
+         		$this->load->view('components/apm-districts-nav', [
          								'list_district' => $list_district,
-         								'district_active' => $district_active));	
+         								'district_active' => $district_active
+         							]);	
          	?>
 
             <div class="tab-content">
