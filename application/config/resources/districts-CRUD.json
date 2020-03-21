@@ -1,0 +1,50 @@
+[
+	{
+		"account": 1234,
+		"district": [
+			1, 2, 3, 4
+		]
+	},
+	{
+		"account": 171020035,
+		"district": [
+			5, 10
+		]
+	},
+	{
+		"account": 171020045,
+		"district": [
+			1, 2
+		]
+	},
+	{
+		"account": 171020036,
+		"district": [
+			"binhthanh"
+		]
+	},
+	{
+		"account": 171020047,
+		"district": [
+			4, 8
+		]
+	},
+	{
+		"account": 171020029,
+		"district": [
+			3, "tanbinh", "phunhuan"
+		]
+	},
+	{
+		"account": 171020010,
+		"district": [
+			1,2,3,4,5,6,7,8,9,10,11,12,"binhtan","tanbinh","phunhuan","govap","mini"
+		]
+	},
+	{
+		"account": 2019, 
+		"district": [
+			1,2,3,4,5,6,7,8,9,10,11,12,"binhtan","tanbinh","phunhuan","govap","mini"
+		]
+	}
+]
