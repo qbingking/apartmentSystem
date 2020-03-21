@@ -49,7 +49,7 @@
                 type:'post',
                 data: {id: room_id, fieldName: field_name, content: content, apm_id: apm_id },
                 success:function(){
-                    console.log(`>>>Room - Updated
+                    console.log(`>>Room - Updated
                         id = ${room_id}
                         field name = ${field_name}
                         value = ${content}`);

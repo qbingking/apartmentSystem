@@ -14,7 +14,7 @@
 				$('.confirm-delete').click(function() {
 					$.ajax({
 							type:'post',
-							url: '<?= base_url() ?>Apartment/Delete',
+							url: '<?= base_url() ?>Apartment/Delete', 
 							data: {apm_id: apm_id}
 					});
 					$(this).closest('.address-item-block').fadeOut(1000,function(){
