@@ -5,10 +5,10 @@
 
 ## Demo:
 
-```bash
+```
 http://demo-gh.sinvagroup.net/
 ```
-```bash
+```
 id: 2019 password: 2020
 ```
 
