@@ -1,6 +1,6 @@
 # Requirements:
 
-- Build a web application to manage Apartments, room.
+- Build a web application to manage Apartments, Rooms.
 - Using a template bootstrap highadmin.
 
 ## Demo:
@@ -8,13 +8,14 @@
 ```
 http://demo-gh.sinvagroup.net/
 ```
+```
+id: 2019 
+password: 2020
+```
 
-```
-id: 2019 password: 2020
-```
-
-```
-id: 2020 password: 2021
+```bash
+id: 2020 
+password: 2021
 ```
 
 ## About Features developed:
