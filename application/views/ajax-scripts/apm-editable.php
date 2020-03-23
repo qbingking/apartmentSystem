@@ -38,7 +38,7 @@
                 return;
             }
             var splited_id = id.split('-');
-            var content = $(this).text();
+            var content = $(this).text().trim();
             var apm_id = $(this).closest('.apm_room.datatable').attr('id').split('_')[2];
             console.log('apm id: ' + apm_id);
             field_name = splited_id[0];
@@ -49,10 +49,11 @@
                 type:'post',
                 data: {id: room_id, fieldName: field_name, content: content, apm_id: apm_id },
                 success:function(){
-                    console.log(`>>Room - Updated
-                        id = ${room_id}
-                        field name = ${field_name}
-                        value = ${content}`);
+                    console.log(">> Room: "+ room_id 
+                                +" - Updated: " 
+                                + field_name 
+                                + " => "
+                                + content);
                 }
             });
             $("body").unbind('click');
@@ -60,7 +61,7 @@
         });
 
         $('.room-status').click(function(){
-            var content = $(this).text();
+            var content = $(this).text().trim();
             console.log("content current is: " + content);
             var apm_id = $(this).closest('.apm_room').attr('id').split('_')[2];
             var room_id = $(this).attr('id').split('-')[1];

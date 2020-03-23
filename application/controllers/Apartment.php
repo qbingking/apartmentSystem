@@ -134,20 +134,24 @@ class Apartment extends CI_Controller {
 		$this->room_model->Add($data);
 	}
 	public function updateRoom()
-	{
+	{	
+		echo "<scripts>";
+		echo "This is updateRoom - APM controller";
+		echo "</script>";
+		
 
 		$room_id = $this->input->post('id');
-		$room_field_name = $this->input->post('fieldName');
-		$room_info_value = $this->input->post('content');
 		$apm_id = $this->input->post('apm_id');
 
 		date_default_timezone_set('Asia/Ho_Chi_Minh');
 		$dateup = date('H:i, d-m-Y');
 		$this->apartment_model->updateOneField($apm_id, 'dateup', $dateup );
 		
-
+		$data_room = [
+			$this->input->post('fieldName') => $this->input->post('content')
+		];
 		$this->load->model('room_model');
-		$this->room_model->Update($room_id, $room_field_name, $room_info_value);
+		$this->room_model->Update($room_id, $data_room);
 	}
 	public function deleteRoom()
 	{
