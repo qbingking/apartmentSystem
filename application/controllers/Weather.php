@@ -5,19 +5,25 @@ class Weather extends CI_Controller {
 
 	public function index()
 	{
-		 // OPTIONS:
-	    curl_setopt($curl, CURLOPT_URL, $url);
-	    curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-	      'APIKEY: 111111111111111111111',
-	      'Content-Type: application/json',
-	    ));
-	    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-	    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-	    // EXECUTE:
-	    $result = curl_exec($curl);
-	    if(!$result){die("Connection Failure");}
-	    curl_close($curl);
-	    return $result;
+		$apiKey = "79e90045733e7949d9a5a45eea68813e";
+		$cityId = "1566083";
+		$googleApiUrl = "http://api.openweathermap.org/data/2.5/weather?id=" . $cityId . "&lang=en&units=metric&APPID=" . $apiKey;
+
+		$ch = curl_init();
+
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_URL, $googleApiUrl);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		curl_setopt($ch, CURLOPT_VERBOSE, 0);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		$response = curl_exec($ch);
+
+		curl_close($ch);
+		$data['data'] = json_decode($response);
+		date_default_timezone_set("Asia/Ho_Chi_Minh");
+		$data['currentTime'] = time();
+		$this->load->view('components/weather', $data);
 	}
 	public function callApi($method, $url, $data)
 	{
