@@ -11,6 +11,7 @@ class Room_model extends CI_Model {
     public function Add($data)
 	{
 	    $this->db->insert('roomkit', $data);
+	    return $this->db->insert_id();
 	}
 	
 	public function Update($room_id = null, $data_room)

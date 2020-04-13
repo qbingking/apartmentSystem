@@ -20,7 +20,6 @@
     <link href="<?= $base_url_plugins ?>/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Plugins css-->
-    <link href="<?= $base_url_plugins ?>/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet" />
     <link href="<?= $base_url_plugins ?>/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
     <link href="<?= $base_url_plugins ?>/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="<?= $base_url_plugins ?>/plugins/switchery/switchery.min.css" rel="stylesheet">

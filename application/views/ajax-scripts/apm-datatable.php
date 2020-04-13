@@ -4,7 +4,7 @@
     $('.datatable').DataTable({
         "dom" : "<'row'<'col-md-12 col-12'ftr>>" +
                 "<'row mb-2'<'col-4'><'col-4'B>>" +
-            "<'row'<'col-5'l><'col-md-2'><'col-5'p>>",
+                "<'row'<'col-5'l><'col-md-2'><'col-5'p>>",
         buttons: [
             {
                 extend: 'excel',
@@ -14,9 +14,10 @@
             {
                 extend: 'copy',
                 text: 'copy',
-                copySuccess: {
-                1: "Copied one row to clipboardd",
-                _: "Copied %d rows to clipboardd"
+                copySuccess: 
+                {
+                    1: "Copied one row to clipboardd",
+                    _: "Copied %d rows to clipboardd"
                 }
             },
         ],

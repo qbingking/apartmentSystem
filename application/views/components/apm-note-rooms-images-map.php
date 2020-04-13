@@ -1,3 +1,12 @@
+<?php 
+    $data['list_service'] = $list_service;
+    $data['district_key'] = $district_key;
+    $data['list_district_editable'] = $list_district_editable;
+
+    $this->load->model('apartment_model');
+    $list_room = $this->apartment_model->getListRoomById($item_apm['id']);
+
+?>
 <div class="row">
     <div class="col-12 p-0">
         <ul class="nav nav-tabs tabs-bordered nav-justified">
@@ -20,20 +29,6 @@
         <div class="tab-content">
             <div class="tab-pane" id="apm_service_<?= $item_apm['id'] ?>">
             <?php 
-                $data['list_service'] = $list_service;
-                $data['district_key'] = $district_key;
-                $data['list_district_editable'] = $list_district_editable;
-
-                $editableRoomStatus = '';
-                $editableRoom = '';
-                $note_editable = '';
-                if($list_district_editable != null)
-                {
-                    $editableRoomStatus = in_array($district_key, $list_district_editable) != 0 ? 'room-status':'';
-                    $editableRoom = in_array($district_key, $list_district_editable) != 0 ? 'contenteditable="true"':'';
-                    $note_editable = in_array($district_key, $list_district_editable) != 0 ? 'note-editable':'';
-                }
-
                 $this->load->view('components/apm-services-mobile', $data);
             ?>
             </div>
@@ -45,7 +40,7 @@
                             <i class="fa fa-quote-left text-white btn"></i>
                     </div>
 
-                    <span class="mb-0 mt-1 font-italic note <?= $note_editable ?>">
+                    <span class="mb-0 mt-1 font-italic note <?= $apartment_note_can_editable ?>">
                         <div id="note-<?= $item_apm['id']?>" 
                             data-name="note" 
                              data-pk="<?= $item_apm['id'] ?>">
@@ -60,79 +55,61 @@
             </div>
 
             <div class="tab-pane" id="apm_room_<?= $item_apm['id'] ?>">
-                <?php 
-                    /*Get all room by ROOM.id_apartment = id of apartment */
-                    $this->load->model('apartment_model');
-                    $list_room = $this->apartment_model->getListRoomById($item_apm['id']);
-                    $add_new_room_btn = 'd-none';
-                    if($list_district_editable != null)
-                    {
-                        $add_new_room_btn = (in_array($district_key, $list_district_editable) != 0) && ($editable == 1) ? '':'d-none' ;
-                    }
-                    
-                 ?>
-                    <div class="table-responsive">
-                        <table id="room_datatable_<?= $item_apm['id'] ?>" class="datatable apm_room table table-bordered">
-                            <div class="addRow mb-1 <?= $add_new_room_btn ?>" id="btn-<?= $item_apm['id'] ?>">
-                                <button class="btn btn-success">+</button>
-                            </div>
-                            <thead>
-                                <tr class="text-muted">
-                                    <th>Mã</th>
-                                    <th class="item-room-type">Loại</th>
-                                    <th class="item-room-price">Giá</th>
-                                    <th>m<sup>2</sup></th>
-                                    <th>Trống</th>
-                                    <th>Sắp</th>
-                                    <th></th>
+                <div class="mb-1 <?= $add_new_room_btn ?>">
+                    <button class="room-new btn-sm btn btn-success" id="room-new-<?= $item_apm['id'] ?>">
+                        <i class="mdi mdi-plus-circle-outline"></i>
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table id="room-table-<?= $item_apm['id'] ?>" class="datatable apm_room table table-bordered">
+                        <thead>
+                            <tr class="text-muted">
+                                <th>Mã</th>
+                                <th class="item-room-type">Loại</th>
+                                <th class="item-room-price">Giá</th>
+                                <th>m<sup>2</sup></th>
+                                <th>Trống</th>
+                                <th>Sắp</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Room infomation -->
+                            <?php foreach ($list_room as $key_room => $item_room): ?>
+                                <?php 
+                                    $delete_td_room = '';
+                                    if($list_district_editable != null)
+                                    {
+                                            $delete_td_room = (in_array($district_key, $list_district_editable) != 0 AND $editable) ? set_btn_delete('room',$item_room['id']):'';
+                                    }
+                                 ?>
+                                <tr id="room-<?= $item_room['id'] ?>">
+                                    <td class="apm-room" id="maphong-<?= $item_room['id'] ?>" <?= $contenteditable ?>>
+                                        <?= $item_room['maphong'] ?>
+                                    </td>
+                                    <td class="apm-room" id="id_type-<?= $item_room['id'] ?>" <?= $contenteditable ?>>
+                                        <?= $item_room['id_type'] ?>
+                                    </td>
+                                    <td class="apm-room" id="price-<?= $item_room['id'] ?>" <?= $contenteditable ?> class="font-weight-bold">
+                                        <?= $item_room['price'] ?>
+                                    </td>
+                                    <td class="apm-room" id="square-<?= $item_room['id'] ?>" <?= $contenteditable ?>>
+                                        <?= $item_room['square'] ?>
+                                    </td>
+                                    <td class="font-weight-bold text-info <?= $room_status_can_editable ?>" id="id_status-<?= $item_room['id'] ?>" class="<?= $room_status_can_editable ?>">
+                                        <?= $item_room['id_status'] ?>
+                                    </td>
+                                    <td id="saptrong-<?= $item_room['id'] ?>" <?= $contenteditable ?>>
+                                        <?= $item_room['saptrong'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $delete_td_room ?>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Room infomation -->
-                                <?php foreach ($list_room as $key_room => $item_room): ?>
-                                    <?php 
-                                        $delete_td_room = '';
-                                        if($list_district_editable != null)
-                                        {
-                                                $delete_td_room = (in_array($district_key, $list_district_editable) != 0 AND $editable) ?
-                                                '
-                                                <div class=" float-left room-delete checkbox checkbox-danger checkbox-circle">
-                                                    <input id="room-delete-'. $item_room['id'].'" type="checkbox"/>
-                                                    <label class="text-danger" for="room-delete-'. $item_room['id'].'">
-                                                        Xóa
-                                                    </label>
-                                                    <div id="confirm-room-delete-'. $item_room['id'].'"></div>
-                                                </div>':'';
-                                        }
-                                     ?>
-                                    <tr>
-                                        <td id="maphong-<?= $item_room['id'] ?>" <?=$editableRoom ?>>
-                                            <?= $item_room['maphong'] ?>
-                                        </td>
-                                        <td id="id_type-<?= $item_room['id'] ?>" <?=$editableRoom ?>>
-                                            <?= $item_room['id_type'] ?>
-                                        </td>
-                                        <td id="price-<?= $item_room['id'] ?>" <?=$editableRoom ?> class="font-weight-bold">
-                                            <?= $item_room['price'] ?>
-                                        </td>
-                                        <td id="square-<?= $item_room['id'] ?>" <?=$editableRoom ?>>
-                                            <?= $item_room['square'] ?>
-                                        </td>
-                                        <td id="id_status-<?= $item_room['id'] ?>" class="<?= $editableRoomStatus ?>">
-                                            <?= $item_room['id_status'] ?>
-                                        </td>
-                                        <td id="saptrong-<?= $item_room['id'] ?>" <?=$editableRoom ?>>
-                                            <?= $item_room['saptrong'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $delete_td_room ?>
-                                        </td>
-
-                                    </tr>
-                                    <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                                <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="tab-pane" id="apm_images<?= $item_apm['id'] ?>">

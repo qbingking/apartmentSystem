@@ -1,17 +1,22 @@
 <script type="text/javascript">
 	$(document).ready(function() {
+/*
+==============================
+    Apatment, services EDITABLE SECTION 
+==============================
+*/
     	//modify buttons style
         $.fn.editableform.buttons =
             '<button type="submit" class="btn btn-success editable-submit btn-sm waves-effect waves-light"><i class="mdi mdi-check"></i></button>' +
             '<button type="button" class="btn btn-light editable-cancel btn-sm waves-effect"><i class="mdi mdi-close"></i></button>';
             
     	$('.address-editable').editable({
-            type: 'textarea',
+            type: 'text',
             mode: 'inline',
             inputclass: 'form-control-sm',
             rows: 2,
             emptytext: "chưa có dữ liệu",
-            url: "<?= base_url() ?>Apartment/updateWithoutRoom"
+            url: "<?= base_url() ?>Apartment/Update"
             
         });
 
@@ -20,21 +25,26 @@
             mode: 'inline',
             inputclass: 'form-control-sm',
             emptytext: "chưa có dữ liệu",
-            url: "<?= base_url() ?>Apartment/updateWithoutRoom"
+            url: "<?= base_url() ?>Apartment/Update"
         });
         $('.note-editable div').editable({
             type: 'textarea',
             mode: 'inline',
             inputclass: 'form-control-sm',
             emptytext: "chưa có dữ liệu",
-            url: "<?= base_url() ?>Apartment/updateWithoutRoom"
+            url: "<?= base_url() ?>Apartment/Update"
         });
 
-        $('.apm_room td').focusout(function(){
+/*
+==============================
+    EDITABLE ROOM SECTION 
+==============================
+*/
+        $("body").delegate('td.apm-room','focusout',function(){
             var id = $(this).attr('id');
             if(typeof id === 'undefined')
             {
-                console.log(">>> confliting even forcusout");
+                console.log(">>> confliting event forcusout with editable");
                 return;
             }
             var splited_id = id.split('-');
@@ -43,26 +53,25 @@
             console.log('apm id: ' + apm_id);
             field_name = splited_id[0];
             room_id = splited_id[1];
-            console.log("room id: " + room_id + " ||  content: " + content + " || field: " + field_name);
+            console.log(
+                "room id: " + room_id 
+                + " & field: " + field_name 
+                + " & content: " + content);
             $.ajax({
-                url: '<?= base_url() ?>Apartment/updateRoom',
+                url: '<?= base_url() ?>Room/Update',
                 type:'post',
                 data: {id: room_id, fieldName: field_name, content: content, apm_id: apm_id },
                 success:function(){
-                    console.log(">> Room: "+ room_id 
-                                +" - Updated: " 
-                                + field_name 
-                                + " => "
-                                + content);
+                    console.log(">> Room.id: "+ room_id 
+                                +" - content Updated: " 
+                                + field_name + " => "+ content);
                 }
             });
-            $("body").unbind('click');
-
         });
 
-        $('.room-status').click(function(){
+        $("body").delegate('.room-status', 'click', function(){
             var content = $(this).text().trim();
-            console.log("content current is: " + content);
+            console.log(">> room.status current is: " + content);
             var apm_id = $(this).closest('.apm_room').attr('id').split('_')[2];
             var room_id = $(this).attr('id').split('-')[1];
             if (content === "") {
@@ -75,10 +84,10 @@
 
             $.ajax({
                 method: 'post',
-                url: "<?= base_url() ?>Apartment/updateRoom",
+                url: "<?= base_url() ?>Room/Update",
                 data: {fieldName: 'id_status',content: content, apm_id: apm_id, id: room_id },
                 success: function(){
-                    console.log('Status room to: '+ content);
+                    console.log('>> room.status to: '+ content);
                 }
             })
         });

@@ -14,7 +14,9 @@ class Login_model extends CI_Model {
 		$u = $account['username'];
 		$p = $account['password'];
 		// Query
-		$query = $this->db->query('SELECT * FROM user WHERE (account = '.$u.' AND password = "'.$p.'") AND (status < 99)');
+		$query = $this->db->query('SELECT * 
+			FROM user 
+			WHERE (account = '.$u.' AND password = "'.$p.'") AND (status > 0)');
 		if($query->num_rows())
 			return $query->result_array();
 		else

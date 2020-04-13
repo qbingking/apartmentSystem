@@ -23,6 +23,7 @@ class User_model extends CI_Model {
 	public function show_members()
 	{
 		$this->db->where('account > ',171020000);
+		$this->db->where('status > ',0);
 		$this->db->order_by('account', 'DESC');
 		$query = $this->db->get('user');
 

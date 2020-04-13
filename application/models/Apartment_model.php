@@ -62,6 +62,13 @@ class Apartment_model extends CI_Model {
 		$this->db->where(array("id" => $apm_id, "id_district" => $district_order));
 		$this->db->update('apartment', array('order_item'=>$order_number));
 	}
+	
+	public function get($table = null)
+	{
+		$this->db->order_by("id DESC");
+    	$query = $this->db->get($table);
+    	return $query->result_array();
+	}
 
 }
 

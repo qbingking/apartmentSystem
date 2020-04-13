@@ -97,7 +97,7 @@ if ( ! function_exists('get_random_quote'))
 		$data = file_get_contents($path_json_file);
 		$data = json_decode($data, true);
 
-		return $data[rand(0,count($data)-1)];
+		return $data[rand(0, count($data) - 1)];
 		
 	}
 }

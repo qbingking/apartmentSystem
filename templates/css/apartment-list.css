@@ -63,10 +63,6 @@
     background-color: #f9fccd;
 }
 
-.switchery{
-        margin-left: 25%;
-}
-
 .carousel-control-next {
     right: -35px;
     font-size: 32px;
@@ -78,6 +74,13 @@
     font-size: 32px;
     color: red;
 }
+
+.carousel-inner .carousel-item {
+  transition: -webkit-transform 1s ease;
+  transition: transform 1s ease;
+  transition: transform 1s ease, -webkit-transform 1s ease;
+}
+
 
 .carousel-control-next-icon, .carousel-control-prev-icon {
     background: #02c0ce no-repeat center center;
@@ -130,9 +133,7 @@
     .address{
         font-size:15.5px;
     }
-    .switchery{
-        margin-left: 39%;
-    }
+
     .room-status-count span{
         font-size:11.5px;
         font-weight: bold;
@@ -163,11 +164,6 @@
 
 }
 @media (min-width: 992px) {
-
-    .switchery{
-        margin-left: 90%;
-    }
-
     .carousel-control-next {
         right: -55px;
         font-size: 32px;
@@ -198,9 +194,7 @@
 
 
 @media (min-width: 1200px) {
-    .switchery{
-        margin-left: 120%;
-    }
+
     .carousel-control-next {
         right: -75px;
         font-size: 32px;
